@@ -127,10 +127,11 @@ const Register = () => {
                             <Form.Label>Mobile number</Form.Label>
                             <Form.Control   
                                 name="mobilenumber" 
-                                type="text" 
+                                type="tel" 
                                 // value={input.mobilenumber}
                                  onChange={onInputChange}
-                                placeholder="mobilenumber" required />
+                                placeholder="mobilenumber" 
+                                maxLength={10} required />
                         </Form.Group>
                         <div style={{display:'flex' , justifyContent:'center'}}>
                         <Button

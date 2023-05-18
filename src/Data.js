@@ -4,6 +4,7 @@
     title:"Twin Cute Bunny Set Combo",
     price : 46,
     type : 'dress',
+    description:'Pellentesque nisl ac dictum tincidunt ut viverra non, sem in sed fringilla a quis eu in et, aliquet convallis ornare pellentesque nibh phasellus tempor.'
 },
 {
     id : '2',
@@ -11,6 +12,7 @@
     title:"Colorful Birdies on Orange Bandana",
     price : 46,
     type : 'dress',
+    description : 'Pellentesque nisl ac dictum tincidunt ut viverra non, sem in sed fringilla a quis eu in et, aliquet convallis ornare pellentesque nibh phasellus tempor.'
 },
 {
     id : '3',
@@ -18,6 +20,7 @@
     title:"Sunny Outdoor Picnic Set Yellow",
     price : 46,
     type : 'dress',
+    description : 'Pellentesque nisl ac dictum tincidunt ut viverra non, sem in sed fringilla a quis eu in et, aliquet convallis ornare pellentesque nibh phasellus tempor.'
 },
 {
     id : '4',
@@ -25,6 +28,7 @@
     title:"Cute Brown Sheep Sleeveless",
     price : 46,
     type : 'dress',
+    description : 'Pellentesque nisl ac dictum tincidunt ut viverra non, sem in sed fringilla a quis eu in et, aliquet convallis ornare pellentesque nibh phasellus tempor.'
 },
 {
     id : '5',
@@ -32,6 +36,7 @@
     title:"Long Sleeve Sweater Navy Blue",
     price : 46,
     type : 'dress',
+    description: 'Pellentesque nisl ac dictum tincidunt ut viverra non, sem in sed fringilla a quis eu in et, aliquet convallis ornare pellentesque nibh phasellus tempor.'
 },
 {
     id : '6',
@@ -39,6 +44,7 @@
     title:"White Comfort Maxx",
     price : 46,
     type : 'dress',
+    description : 'Pellentesque nisl ac dictum tincidunt ut viverra non, sem in sed fringilla a quis eu in et, aliquet convallis ornare pellentesque nibh phasellus tempor.'
 },
 {
     id : '7',
@@ -46,6 +52,7 @@
     title:"Extra Soft Touch Lamb Doll",
     price : 46,
     type : 'toys',
+    description : 'Pellentesque nisl ac dictum tincidunt ut viverra non, sem in sed fringilla a quis eu in et, aliquet convallis ornare pellentesque nibh phasellus tempor.'
 },
 {
     id : '8',
@@ -53,6 +60,7 @@
     title:"Teddy Bear Ready To Flight Doll",
     price : 46,
     type : 'toys',
+    description : 'Pellentesque nisl ac dictum tincidunt ut viverra non, sem in sed fringilla a quis eu in et, aliquet convallis ornare pellentesque nibh phasellus tempor.'
 },
 {
     id : '9',
@@ -60,6 +68,7 @@
     title:"ZooMate 3 Animal Set Toys",
     price : 46,
     type : 'toys',
+    description : 'Pellentesque nisl ac dictum tincidunt ut viverra non, sem in sed fringilla a quis eu in et, aliquet convallis ornare pellentesque nibh phasellus tempor.'
 },
 {
     id : '10',
@@ -67,6 +76,7 @@
     title:"Orapple Kitty Rattle Set Musical Sound",
     price : 46,
     type : 'toys',
+    description : 'Pellentesque nisl ac dictum tincidunt ut viverra non, sem in sed fringilla a quis eu in et, aliquet convallis ornare pellentesque nibh phasellus tempor.'
 },
 {
     id : '11',
@@ -74,6 +84,7 @@
     title:"First Play Safari Play Gym For Kids",
     price : 46,
     type : 'toys',
+    description : 'Pellentesque nisl ac dictum tincidunt ut viverra non, sem in sed fringilla a quis eu in et, aliquet convallis ornare pellentesque nibh phasellus tempor.'
 },
 {
     id : '12',
@@ -81,6 +92,7 @@
     title:"Homecute Foldable Playhouse",
     price : 46,
     type : 'toys',
+    description : 'Pellentesque nisl ac dictum tincidunt ut viverra non, sem in sed fringilla a quis eu in et, aliquet convallis ornare pellentesque nibh phasellus tempor.'
 },
 {
     id : '13',
@@ -88,6 +100,7 @@
     title:"Colorful Birdies on Orange Bandana",
     price : 1950,
     type : 'babycare',
+    description : 'Pellentesque nisl ac dictum tincidunt ut viverra non, sem in sed fringilla a quis eu in et, aliquet convallis ornare pellentesque nibh phasellus tempor.'
 },
 {
     id : '14',
@@ -95,6 +108,7 @@
     title:"Baby Bath with Plug ",
     price :  2990,
     type : 'babycare',
+    description : 'Pellentesque nisl ac dictum tincidunt ut viverra non, sem in sed fringilla a quis eu in et, aliquet convallis ornare pellentesque nibh phasellus tempor.'
 },
 {
     id : '15',
@@ -102,6 +116,7 @@
     title:"Baby Brush and Comb",
     price : 749,
     type : 'babycare',
+    description : 'Pellentesque nisl ac dictum tincidunt ut viverra non, sem in sed fringilla a quis eu in et, aliquet convallis ornare pellentesque nibh phasellus tempor.'
 },
 {
     id : '16',
@@ -109,6 +124,7 @@
     title:"Toiletry Pouch with 9 Accessories",
     price : 6999,
     type : 'babycare',
+    description : 'Pellentesque nisl ac dictum tincidunt ut viverra non, sem in sed fringilla a quis eu in et, aliquet convallis ornare pellentesque nibh phasellus tempor.'
 },
 {
     id : '17',
@@ -116,6 +132,7 @@
     title :"Penguin baby teether",
     price : 599,
     type : 'babycare',
+    description : 'Pellentesque nisl ac dictum tincidunt ut viverra non, sem in sed fringilla a quis eu in et, aliquet convallis ornare pellentesque nibh phasellus tempor.'
 },
 {
     id : '18',
@@ -123,6 +140,7 @@
     title:"Pure & Beyond Baby Shampoo",
     price : 318,
     type : 'babycare',
+    description : 'Pellentesque nisl ac dictum tincidunt ut viverra non, sem in sed fringilla a quis eu in et, aliquet convallis ornare pellentesque nibh phasellus tempor.'
 }]
 
 const users = [{
