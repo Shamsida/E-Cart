@@ -35,7 +35,7 @@ function Home() {
     <Carousel.Item>
       <img 
         className="d-block w-100"
-        src="https://rforrabbit.com/pub/media/feather_soft_diaper_1723x507.jpg"
+        src="https://rforrabbit.com/cdn/shop/files/buy_3_Option.jpg?v=1690613472&width=1880"
         alt="Third slide"
       />
       <Carousel.Caption>
@@ -68,7 +68,7 @@ function Home() {
     <Carousel.Item>
       <img 
         className="d-block w-100"
-        src="https://rforrabbit.com/pub/media/sale1_1723x507.jpg"
+        src="https://rforrabbit.com/cdn/shop/files/Payday_1920X600_1.jpg?v=1688130679&width=1880"
         alt="Sixsth slide"
       />
       <Carousel.Caption>
@@ -79,7 +79,7 @@ function Home() {
     <Carousel.Item>
       <img 
         className="d-block w-100"
-        src="https://rforrabbit.com/pub/media/mothersday_1723x507.jpg"
+        src="https://rforrabbit.com/cdn/shop/files/Diaper_1920x600-1_1.jpg?v=1689312260&width=1880"
         alt="Seventh slide"
       />
       <Carousel.Caption>
@@ -93,21 +93,21 @@ function Home() {
       <h3 style={{marginTop:'10px', marginLeft:550}}>Shop By Category</h3>
         <div style={{display :"inline-grid", gridTemplateColumns:'auto auto auto', columnGap:'45px' ,marginTop:'20px', marginLeft:150}}>
           <Card className='bata' style={{ width: '20rem',height: '30rem'}}>
-            <Card.Img className='img' variant="top" onClick={()=> navigate('/toys')}
+            <Card.Img className='img' variant="top" onClick={()=> navigate('toys')}
               src="https://websitedemos.net/baby-store-04/wp-content/uploads/sites/750/2020/12/baby-store-toys-banner-bg.jpg" />
               <div className="overlay"></div>
               <div className="babykus"> <span>Toys</span></div>
             </Card>
 
             <Card className='bata' style={{ width: '20rem', height: '30rem' }}>
-            <Card.Img variant="top" onClick={()=> navigate('/dress')}
+            <Card.Img variant="top" onClick={()=> navigate('dress')}
               src="https://websitedemos.net/baby-store-04/wp-content/uploads/sites/750/2020/12/baby-store-clothes-banner-bg.jpg" />
               <div className="overlay"></div>
               <div className="babyku"> <span>Dress</span></div>
             </Card>
             
             <Card className='bata' style={{ width: '20rem',height: '30rem' }}>
-            <Card.Img variant="top"  onClick={()=> navigate('/babycare')}
+            <Card.Img variant="top"  onClick={()=> navigate('babycare')}
               src="https://websitedemos.net/baby-store-04/wp-content/uploads/sites/750/2020/12/baby-store-nutrition-banner-bg.jpg" />
               <div className="overlay"></div>
               <div className="babyku"> <span>Babycare</span></div>
