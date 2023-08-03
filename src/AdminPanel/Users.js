@@ -5,7 +5,8 @@ import { FaEye } from 'react-icons/fa';
 import { userContext } from '../App';
 import { useContext } from 'react';
 import Form from 'react-bootstrap/Form';
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
+import axios from "axios";
 
 
 function Users() {
@@ -13,6 +14,26 @@ function Users() {
   const { todos, setTodos }= user.state;
   const[searchInput , setSearchinput] = useState('');
   const [todos1 , setTodos1] = useState(todos);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "https://localhost:7152/api/user/GetUsers"
+      );
+      const data = response.data;
+      console.log(data,"data");
+      setTodos1(data);
+      console.log(todos1,"todo");
+      setTodos(data);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
 
   const handleSearch = (query) => {
     const newList = todos.filter(x => {

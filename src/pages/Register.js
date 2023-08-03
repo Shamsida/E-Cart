@@ -3,6 +3,9 @@ import { Container, Row, Col, Button, Form} from 'react-bootstrap';
 import { useContext } from 'react';
 import { userContext } from '../App';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { ToastContainer , toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
 
@@ -22,11 +25,34 @@ const Register = () => {
            });
          };
 
-      const handleSubmit = (event) => {
+      const handleSubmit = async (event) => {
+        const form = event.currentTarget;
         event.preventDefault();
         console.log(input);
         setTodos([...todos, { id:Date.now(),firstname:user.state.input.firstname, lastname:user.state.input.lastname, email:user.state.input.email, username:user.state.input.username, password:user.state.input.password , mobilenumber:user.state.input.mobilenumber, imgurl:user.state.input.imgurl, completed:false}]);
-        setInput({
+        console.log(todos);
+        const firstname = form.firstname.value;
+        const lastname = form.lastname.value;
+        const email = form.email.value;
+        const username = form.username.value;
+        const password = form.password.value;
+        const mobilenumber = form.mobilenumber.value;
+        const imgurl = form.imgurl.value;
+        console.log(firstname, lastname, email, username, password, mobilenumber, imgurl);
+        try{
+            const response=await axios.post('https://localhost:7152/api/user/Signup',{
+                firstname,
+                lastname,
+                email,
+                username,
+                password,
+                mobilenumber,
+                imageurl : imgurl
+            });
+            console.log(response,"response");
+            const resData = response.data
+            console.log(resData,"resData");
+            setInput({
                 firstname : "",
                 lastname : "",
                 email : "",
@@ -35,7 +61,11 @@ const Register = () => {
                 imgurl : '',
                 password : ""
               });
-        console.log(todos);
+            toast.success("Student has been added");
+        }catch(error){
+            console.log(error);
+            console.log(error.response.data);
+        }
       };
 
     //   const handleSubmit = (event)=>{
@@ -69,7 +99,7 @@ const Register = () => {
                                 <Form.Control  
                                     name="firstname" 
                                     type="text" 
-                                    //  value={input.firstname}
+                                    value={user.state.input.firstname}
                                      onChange={onInputChange}
                                     placeholder="First name" required />
                             </Form.Group>
@@ -78,7 +108,7 @@ const Register = () => {
                                 <Form.Control   
                                     name="lastname" 
                                     type="text" 
-                                    // value={input.lastname}
+                                    value={user.state.input.lastname}
                                      onChange={onInputChange}
                                     placeholder="Last name" required />
                             </Form.Group>
@@ -88,7 +118,7 @@ const Register = () => {
                             <Form.Control  
                                 name="email" 
                                 type="email" 
-                                // value={input.email}
+                                value={user.state.input.email}
                                  onChange={onInputChange}
                                 placeholder="Email" required />
                         </Form.Group>
@@ -98,7 +128,7 @@ const Register = () => {
                             <Form.Control  
                                 name="username" 
                                 ype="text" 
-                                // value={input.username}
+                                value={user.state.input.username}
                                  onChange={onInputChange}
                                 placeholder="Username" 
                                 minLength={3} required />
@@ -108,7 +138,7 @@ const Register = () => {
                             <Form.Control   
                                 name="password" 
                                 type="password" 
-                                // value={input.password}
+                                value={user.state.input.password}
                                  onChange={onInputChange}
                                 placeholder="Password" 
                                 minLength={6} required />
@@ -117,18 +147,18 @@ const Register = () => {
                         <Form.Group className="mb-3">
                             <Form.Label>Image </Form.Label>
                             <Form.Control   
-                                name="imageurl" 
+                                name="imgurl" 
                                 type="text" 
-                                // value={input.mobilenumber}
+                                value={user.state.input.imgurl}
                                  onChange={onInputChange}
-                                placeholder="imgurl" required />
+                                placeholder="imageurl" required />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Mobile number</Form.Label>
                             <Form.Control   
                                 name="mobilenumber" 
                                 type="tel" 
-                                // value={input.mobilenumber}
+                                value={user.state.input.mobilenumber}
                                  onChange={onInputChange}
                                 placeholder="mobilenumber" 
                                 maxLength={10} required />

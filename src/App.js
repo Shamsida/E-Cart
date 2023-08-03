@@ -39,7 +39,7 @@ function App() {
     imgurl : '',
     password : ""
   });
-  const [todos, setTodos] = useState(users);
+  const [todos, setTodos] = useState([]);
   const [ productdata , setProductdata ] = useState(categories1);
   const [data, setData] = useState({
     id : "",

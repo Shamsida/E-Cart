@@ -6,6 +6,7 @@ import { useParams} from 'react-router-dom';
 import { userContext } from '../App';
 import { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 function UserDetails() {
 
@@ -15,11 +16,26 @@ function UserDetails() {
   
   const {userId} = useParams();
   const [user1, setUser1] = useState();
-  useEffect(() =>{ 
-    const item = todos.filter((todo)=> (todo.id)  == parseInt(userId) );
-    console.log(item,"item---------------");
-    setUser1(item);
-  },[]);
+
+  // useEffect(() =>{ 
+  //   const item = todos.filter((todo)=> (todo.id)  == parseInt(userId) );
+  //   console.log(item,"item---------------");
+  //   setUser1(item);
+  // },[]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`https://localhost:7152/api/user/GetUserSById?id=${userId}`);
+        const data = response.data;
+        setUser1(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, [userId]);
+
   console.log(user1,"user1--------------------")
 
   return (
