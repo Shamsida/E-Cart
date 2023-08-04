@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 import { userContext } from '../App';
 import { useContext } from 'react';
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
+import axios from "axios";
 
 
 function Products() {
@@ -16,6 +17,25 @@ function Products() {
     const { productdata , setProductdata }= product.state;
     const[searchInput , setSearchinput] = useState('');
     const [productData1, setProductData1] = useState(productdata);
+
+    useEffect(() => {
+      fetchData();
+    }, []);
+  
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://localhost:7152/api/Product/GetProducts"
+        );
+        const data = response.data.result;
+        console.log(data,"data");
+        setProductdata(data);
+        console.log(setProductdata,"Productdata");
+        setProductData1(data);
+      } catch (e) {
+        console.error(e);
+      }
+    };
 
     const DeletHandle= (id)=>{
       const item = productdata.filter((item)=>  item.id !== id);
@@ -71,7 +91,7 @@ console.log(productdata)
                   </tr>
                   </thead>
                     <tbody style={{textAlign:'center'}}>
-                        {productData1.map((item, index)=>{
+                    {Array.isArray(productData1) && productData1.map((item, index) => {
                             console.log(item.quantity);
                             return(
                                 <tr key={index}>

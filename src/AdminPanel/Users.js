@@ -77,7 +77,7 @@ function Users() {
           <td style={{paddingTop :45, paddingLeft:20}} >
           <div className='d-flex align-items-center'>
               <img
-                src={item.imgurl}
+                src={item.imageurl}
                 alt=''
                 style={{ width: '60px', height: '60px' }}
                 className='rounded-circle'
@@ -89,7 +89,7 @@ function Users() {
             </div>
           </td>
           <td style={{display: 'flex',justifyContent: 'center', height: '9rem' , paddingTop : 50}} >
-                                      <Link  to={`/admin/userDetails/${item.id}`} 
+                                      <Link  to={`/admin/userDetails/${item.userId}`} 
                                       className='btn btn-outline-primary p-2'
                                       style={{height: '33px' , display: 'flex' , justifycontent: 'center'}}>
                                         <FaEye/></Link>

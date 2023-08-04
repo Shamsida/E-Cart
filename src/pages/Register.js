@@ -46,7 +46,7 @@ const Register = () => {
                 email,
                 username,
                 password,
-                mobilenumber,
+                number : mobilenumber,
                 imageurl : imgurl
             });
             console.log(response,"response");

@@ -15,7 +15,7 @@ function UserDetails() {
   const navigate = useNavigate();
   
   const {userId} = useParams();
-  const [user1, setUser1] = useState();
+  const [user1, setUser1] = useState(todos);
 
   // useEffect(() =>{ 
   //   const item = todos.filter((todo)=> (todo.id)  == parseInt(userId) );
@@ -26,8 +26,11 @@ function UserDetails() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log(userId, 'userid');
         const response = await axios.get(`https://localhost:7152/api/user/GetUserSById?id=${userId}`);
         const data = response.data;
+
+        // Set the user1 state to the retrieved object directly
         setUser1(data);
       } catch (error) {
         console.error(error);
@@ -42,17 +45,17 @@ function UserDetails() {
     <div style={{marginLeft:250, marginRight:20 }}>
        <div style={{marginTop:50}}>
         <h2 style={{marginLeft:10 , marginBottom:15}} >User Details</h2>
-        {user1 && 
-        user1.map((item, index)=>{
-            return( 
+         {user1 && (
+        // user1.map((item, index)=>{
+        //     return(  */}
           <div className='border p-4'style={{display:'flex' , borderRadius:6 , borderWidth :'10px', height: 450}}>
           <div style={{width:250}}>
           <Card style={{height:230, textAlign:'center'}}> 
-            <Card.Img variant="top" src={item.imgurl}
+            <Card.Img variant="top" src={user1.imageurl}
             style={{ marginLeft:65, marginTop:40 , width: '100px', height: '100px' }}
             className='rounded-circle' />
             <Card.Body>
-              <Card.Title style={{marginTop:15}}>{item.firstname}&nbsp;{item.lastname}</Card.Title>
+              <Card.Title style={{marginTop:15}}>{user1.firstname}&nbsp;{user1.lastname}</Card.Title>
             </Card.Body>
           </Card>
           </div>
@@ -69,7 +72,7 @@ function UserDetails() {
                 <Input 
                   name="id"
                   disabled
-                   value={item.firstname}
+                   value={user1.firstname}
                   // placeholder="Enter id here"
                   type="text"
                 />
@@ -86,7 +89,7 @@ function UserDetails() {
                 <Input
                   name="image"
                   disabled
-                  defaultValue={item.lastname}
+                  defaultValue={user1.lastname}
                   // placeholder="Enter image url here"
                   type="text"
                   // onChange={onInputChange}
@@ -106,7 +109,7 @@ function UserDetails() {
                   disabled
                   // placeholder="Enter title here"
                   type="text"
-                  value={item.username}
+                  value={user1.username}
                   // defaultValue={item.title}
                 />
               </Col>
@@ -124,7 +127,7 @@ function UserDetails() {
                   disabled
                   // placeholder="Enter title here"
                   type="text"
-                  value={item.mobilenumber}
+                  value={user1.number}
                   // defaultValue={item.price}
                 />
               </Col>
@@ -134,7 +137,7 @@ function UserDetails() {
                 for="type"
                 sm={2}
               >
-              Category :
+              Email :
               </Label>
               <Col sm={8} style={{marginLeft:50}}>
                 <Input
@@ -142,6 +145,7 @@ function UserDetails() {
                   disabled
                   // placeholder="Enter title here"
                   type="text"
+                  value={user1.email}
                   // defaultValue={item.type}
                 />
               </Col>
@@ -166,8 +170,9 @@ function UserDetails() {
           </div>
 
         </div>
-        )
-      })}
+        )}
+        {/* )
+      })} */}
         
        </div>
     </div>

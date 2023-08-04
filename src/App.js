@@ -40,7 +40,7 @@ function App() {
     password : ""
   });
   const [todos, setTodos] = useState([]);
-  const [ productdata , setProductdata ] = useState(categories1);
+  const [ productdata , setProductdata ] = useState([]);
   const [data, setData] = useState({
     id : "",
     image : "",
