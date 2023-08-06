@@ -15,6 +15,7 @@ import { userContext } from '../App';
 import { useContext } from 'react';
 import './Header.css';
 import Announcement from './Announcement';
+import axios from 'axios';
 
 function Header() {
 
@@ -30,21 +31,29 @@ function Header() {
   }
 
 
-useEffect(()=>{
-  const item = todos.filter((todo)=> (todo.username)  === userState );
-    console.log(item,"item---------------");
-    setUser1(item);
-},[])
-  //const {
-   // isEmpty,
-   // totalItems,
- // } = useCart();
+// useEffect(()=>{
+//   const item = todos.filter((todo)=> (todo.username)  === userState );
+//     console.log(item,"item---------------");
+//     setUser1(item);
+// },[])
 
-  //console.log( totalItems);
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      console.log(userState, 'userstate');
+      const response = await axios.get(`https://localhost:7152/api/user/GetUsersByUsername?username=${userState}`);
+      const item = response.data;
+      setUser1(item);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  fetchData();
+}, [userState]);
 
   return (
     <div className='maindiv'>
-           {console.log(user1.imgurl,'...........')}
+           {console.log(user1.imageurl,'...........')}
           <Announcement />
          
           <Navbar bg="light" expand="lg">
@@ -78,18 +87,18 @@ useEffect(()=>{
                 />
                 {confirm? <Button style={{width:70}} onClick={Logout} variant="outline-secondary">
                 {user1 && 
-                  user1.map((item)=>(
+                  // user1.map((item)=>(
                   <div style={{display:'flex' , justifyContent:'space-between', width:'47px'}}>
                 <img
-                      src={item.imgurl}
+                      src={user1.imageurl}
                       alt=''
                       style={{ width: '28px', height: '28px' }}
                       className='rounded-circle'
                     />
                   <FiLogOut  style={{marginTop:'4px'}}/>
                  </div>
-                  )
-                  )}
+                  // 
+                }
                 </Button> :<Button onClick={()=> navigate('/login')} variant="outline-secondary"><FaUserAlt /></Button>}
                 {confirm? <Button onClick={()=> navigate('/cart')} className='btn' variant="outline-secondary">
                   {/* <Badge badgeContent={4} color="info"> */}

@@ -18,7 +18,7 @@ import Header from './components/Header';
 import AddProduct from './AdminPanel/AddProduct';
 import EditProduct from './AdminPanel/EditProduct';
 import UserDetails from './AdminPanel/UserDetails';
-import { categories1 , users} from './Data';
+//import { categories1 , users} from './Data';
 import AdminLogin from './AdminPanel/AdminLogin';
 
 const userContext = createContext ();
@@ -46,11 +46,12 @@ function App() {
     image : "",
     title : "",
     price : "",
-    type : ""
+    categoryname : "",
+    description : ""
   });
   const [adminlog, setAdminlog] = useState([{
     username : "Ashwin",
-    password : "ashwin23@gmail.com",
+    password : "ashwin23",
   }]);
 
   useEffect(()=>{
@@ -95,10 +96,10 @@ function App() {
             <Route path="/admin/userDetails/:userId" element={<UserDetails />} />
             <Route path="/admin/products" element={<Products />} />
             <Route path="/admin/addproducts" element={<AddProduct />} />
-            <Route path="/admin/editproducts/:userId" element={<EditProduct />} />
+            <Route path="/admin/editproducts/:productId" element={<EditProduct />} />
           </Route>
           {/* <Route path="admin" element={<Admin />} /> */}
-          <Route path="productdetails/:userId" element={<ProductDetails />} />
+          <Route path="productdetails/:productId" element={<ProductDetails />} />
       </Routes>
     </CartProvider>
     </div>

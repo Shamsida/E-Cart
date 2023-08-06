@@ -9,16 +9,26 @@ import { userContext } from '../App';
 import { useContext } from 'react';
 import { useState , useEffect} from 'react';
 import axios from "axios";
+import { ToastContainer , toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function Products() {
   const navigate = useNavigate();
   const product = useContext(userContext);
-    const { productdata , setProductdata }= product.state;
+    const { productdata , setProductdata, setData }= product.state;
     const[searchInput , setSearchinput] = useState('');
     const [productData1, setProductData1] = useState(productdata);
 
     useEffect(() => {
+      setData({
+        id : '',
+        image : '',
+        title : '',
+        price : '',
+        categoryName : '',
+        description : ''
+      });
       fetchData();
     }, []);
   
@@ -37,11 +47,27 @@ function Products() {
       }
     };
 
-    const DeletHandle= (id)=>{
-      const item = productdata.filter((item)=>  item.id !== id);
-      setProductData1(item);
-      setProductdata(item);
-  }
+    const DeletHandle= async (id)=>{
+      // const item = productdata.filter((item)=>  item.id !== id);
+      // setProductData1(item);
+      // setProductdata(item);
+       if(window.confirm("Are you sure to delete this student") === true){
+         try {
+           await axios.delete(`https://localhost:7152/api/Product/DeleteItems?Id=${id}`)
+           .then((result)=>{
+             if(result.status ===200){
+               console.log("Student deleted successfully!");
+               fetchData();
+               toast.success("Student deleted successfully!");
+               //alert("Student deleted successfully!");
+             }
+           })
+         } catch (error) {
+           console.error(error);
+         }
+       }   
+      }
+
 console.log(productdata)
   const handleSearch = (query) => {
     const newList = productdata.filter(x => {

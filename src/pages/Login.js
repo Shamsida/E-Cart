@@ -5,11 +5,9 @@ import { useContext } from 'react';
 import { userContext } from '../App';
 import { AiFillHome } from 'react-icons/ai';
 import { useNavigate } from "react-router-dom";
-
-
-//icons
 import { AiOutlineUser } from 'react-icons/ai';
 import { VscKey } from 'react-icons/vsc';
+import axios from 'axios';
 
 const Login = () => {
 
@@ -17,23 +15,25 @@ const Login = () => {
     const { todos , setConfirm , setUserState }= user.state;
     const navigate = useNavigate();
 
-    const handleSubmit = (event)=>{
+    const handleSubmit = async (event)=>{
         const form = event.currentTarget;
         event.preventDefault();
         const username = form.username.value;
         const password = form.password.value;
         console.log(username,password);
-
-        const filterUSer=todos.filter((element)=>element.username===username&&element.password===password);
-        if(filterUSer.length>0){
+        try {
+            const response = await axios.post('https://localhost:7152/api/user/Login', {
+              username,
+              password,
+            });
             navigate('/')
             alert('success');
             setConfirm(true);
             setUserState(username ,true);
-        }
-        else{
-            alert('User Not Exist')
-        }
+            console.log('Login successful!', response.data);
+          } catch (error) {
+            console.error('Login failed:', error.response.data);
+          }
      }
     
     return (

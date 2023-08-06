@@ -2,11 +2,17 @@ import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom"; 
+import { Link } from 'react-router-dom';
 import './Home.css';
 
 
 function Home() {
   const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate('/toys'); // Navigate to the '/toys' route when the card is clicked.
+  };
+  
   return (
     <div >
     <Carousel className='slide'>
@@ -93,24 +99,30 @@ function Home() {
       <h3 style={{marginTop:'10px', marginLeft:550}}>Shop By Category</h3>
         <div style={{display :"inline-grid", gridTemplateColumns:'auto auto auto', columnGap:'45px' ,marginTop:'20px', marginLeft:150}}>
           <Card className='bata' style={{ width: '20rem',height: '30rem'}}>
-            <Card.Img className='img' variant="top" onClick={()=> navigate('toys')}
+          <Link  to={`/toys`} >
+            <Card.Img className='img' variant="top" 
               src="https://websitedemos.net/baby-store-04/wp-content/uploads/sites/750/2020/12/baby-store-toys-banner-bg.jpg" />
               <div className="overlay"></div>
               <div className="babykus"> <span>Toys</span></div>
+              </Link>
             </Card>
 
             <Card className='bata' style={{ width: '20rem', height: '30rem' }}>
-            <Card.Img variant="top" onClick={()=> navigate('dress')}
+            <Link  to={`/dress`} >
+            <Card.Img variant="top"
               src="https://websitedemos.net/baby-store-04/wp-content/uploads/sites/750/2020/12/baby-store-clothes-banner-bg.jpg" />
               <div className="overlay"></div>
               <div className="babyku"> <span>Dress</span></div>
+            </Link>
             </Card>
             
             <Card className='bata' style={{ width: '20rem',height: '30rem' }}>
-            <Card.Img variant="top"  onClick={()=> navigate('babycare')}
+            <Link  to={`/babycare`} >
+            <Card.Img variant="top"
               src="https://websitedemos.net/baby-store-04/wp-content/uploads/sites/750/2020/12/baby-store-nutrition-banner-bg.jpg" />
               <div className="overlay"></div>
               <div className="babyku"> <span>Babycare</span></div>
+              </Link>
             </Card>
         </div>
       </div>

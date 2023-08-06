@@ -5,7 +5,7 @@ import { userContext } from '../App';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { ToastContainer , toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const Register = () => {
 
@@ -67,23 +67,6 @@ const Register = () => {
             console.log(error.response.data);
         }
       };
-
-    //   const handleSubmit = (event)=>{
-    //        const form = event.currentTarget;
-    //        event.preventDefault();
-    //     //    setTodos([...todos, { firstname:user.state.input.firstname, lastname:user.state.input.lastname, email:user.state.input.email, completed:false}]);
-    //     //    console.log(todos);
-    //        const username = form.username.value;
-    //        const password = form.password.value;
-    //        const firstname = form.firstName.value;
-    //        const lastname = form.lastName.value;
-    //        const email = form.email.value;
-    //        const mobilenumber = form.mobilenumber.value;
-        
-    //        if(username && password && firstname && lastname && email && mobilenumber){
-    //     //       //console.log('call api here');
-    //     //       //console.log(username, password, firstname, lastname, email,mobilenumber);
-    //   }
 
     return (
        <Container className="">
