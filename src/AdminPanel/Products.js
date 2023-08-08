@@ -48,9 +48,6 @@ function Products() {
     };
 
     const DeletHandle= async (id)=>{
-      // const item = productdata.filter((item)=>  item.id !== id);
-      // setProductData1(item);
-      // setProductdata(item);
        if(window.confirm("Are you sure to delete this student") === true){
          try {
            await axios.delete(`https://localhost:7152/api/Product/DeleteItems?Id=${id}`)

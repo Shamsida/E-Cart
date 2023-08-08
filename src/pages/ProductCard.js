@@ -9,29 +9,14 @@ import { userContext } from '../App';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
-
 function ProductCard(props) {
 
     const user = useContext(userContext);
-    const { confirm , userState }= user.state;
-    const [user1, setUser1] = useState([0]);
+    const { confirm , user1 }= user.state;
+    //const [user1, setUser1] = useState([0]);
 
   let { image, price, title, id} = props.data;
     //const { addItem } = useCart();
-
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            console.log(userState, 'userstate');
-            const response = await axios.get(`https://localhost:7152/api/user/GetUsersByUsername?username=${userState}`);
-            const item = response.data;
-            setUser1(item);
-          } catch (error) {
-            console.error(error);
-          }
-        };
-        fetchData();
-      }, [userState]);
 
     const navigate = useNavigate();
 
@@ -41,10 +26,11 @@ function ProductCard(props) {
         try {
             console.log(user1.userId);
             const userId = user1.userId;
-            const response = await axios.post(`https://localhost:7152/api/Cart/AddToCart?userId=${userId}&qty=1`, {
-                prodID: prodID
+            const response = await axios.post(`https://localhost:7152/api/Cart/AddToCart?userId=${userId}`, {
+              prodID : prodID,
+              qty : 1
             });
-      
+            
             console.log('Item added to cart:', response.data);
             alert('Item added to cart');
           } catch (error) {
@@ -52,8 +38,20 @@ function ProductCard(props) {
           }
     }
 
-    const addToWishlist = () =>{
-        console.log(user1.userId);
+    const addToWishlist = async () =>{
+        const prodID = id;
+        try {
+            console.log(user1.userId);
+            const userId = user1.userId;
+            const response = await axios.post(`https://localhost:7152/api/Wishlist/AddToWishList?userId=${userId}&prodID=${id}`);
+            if(response.status ===200){
+                console.log("Item added to Wishlist..!");
+              }
+            console.log('Item added to cart:', response.data);
+            alert('Item added to Wishlist');
+          } catch (error) {
+            console.error('Error adding item to Wishlist:', error.response.data);
+          }
     }
   return (
     <div style={{margin:'20px'}}>
@@ -89,7 +87,7 @@ function ProductCard(props) {
         </div>
         
         <Button
-            onClick={()=> addToWishlist()}
+            onClick={()=> {confirm? addToWishlist() : navigate('/login')}}
             className={`d-flex align-item-center m-auto border-0`}
             style={{backgroundColor:'#f47c7c'}}
         >

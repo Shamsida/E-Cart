@@ -4,8 +4,9 @@ import { useContext } from 'react';
 import { userContext } from '../App';
 import { useNavigate } from "react-router-dom";
 import { AiFillHome } from 'react-icons/ai';
+import axios from 'axios';
 
-//icons
+//icons 
 import { AiOutlineUser } from 'react-icons/ai';
 import { VscKey } from 'react-icons/vsc';
 
@@ -15,23 +16,26 @@ const AdminLogin = () => {
     const { adminlog , setAdminState }= user.state;
     const navigate = useNavigate();
 
-    const handleSubmit = (event)=>{
+    const handleSubmit = async (event)=>{
         const form = event.currentTarget;
         event.preventDefault();
         const username = form.username.value;
         const password = form.password.value;
         console.log(username,password);
 
-        const filterUSer=adminlog.filter((element)=>element.username===username&&element.password===password);
-        if(filterUSer.length>0){
-            setAdminState(true)
+        try {
+            const response = await axios.post('https://localhost:7152/api/admin/Login', {
+              username,
+              password,
+            });
+            setAdminState(true);
             alert('success');
-            navigate('/admin')
+            navigate('/admin');
+            console.log('Login successful!', response.data);
+          } catch (error) {
+            console.error('Login failed:', error.response.data);
+          }
         }
-        else{
-            alert('User Not Exist')
-        }
-     }
     
     return (
       <div style={{marginTop:'3rem'}}>
@@ -68,15 +72,6 @@ const AdminLogin = () => {
                         > <AiFillHome />
                         </Button>
                         </div>
-                        {/* <Form.Group className="mt-3 text-center">
-                            <Form.Text className="text-muted fw-bold">
-                                New to E-cart?
-                            </Form.Text>
-                            <Row className="py-2 border-bottom mb-3"/>
-                            <Link to='/register' className="btn btn-info rounded-0">
-                                Create your E-cart account 
-                            </Link>
-                        </Form.Group> */}
                     </Form>
                 </Col>
             </Row>

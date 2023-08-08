@@ -4,12 +4,12 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { AiFillHeart} from 'react-icons/ai';
 import { FaUserAlt } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { RiAdminLine } from 'react-icons/ri';
 // import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-//import { useCart } from 'react-use-cart';
 import { useNavigate } from "react-router-dom";
 import { userContext } from '../App';
 import { useContext } from 'react';
@@ -21,21 +21,14 @@ function Header() {
 
   const navigate = useNavigate();
   const add = useContext(userContext);
-  const {confirm, setConfirm , adminState ,  userState , todos} = add.state;
-  const [user1, setUser1] = useState([0]);
+  const {confirm, setConfirm , adminState ,  userState , todos, user1, setUser1} = add.state;
+  //const [user1, setUser1] = useState([0]);
 
 
   const Logout=()=>{
     setConfirm(false);
     navigate('/');
   }
-
-
-// useEffect(()=>{
-//   const item = todos.filter((todo)=> (todo.username)  === userState );
-//     console.log(item,"item---------------");
-//     setUser1(item);
-// },[])
 
 useEffect(() => {
   const fetchData = async () => {
@@ -44,6 +37,7 @@ useEffect(() => {
       const response = await axios.get(`https://localhost:7152/api/user/GetUsersByUsername?username=${userState}`);
       const item = response.data;
       setUser1(item);
+
     } catch (error) {
       console.error(error);
     }
@@ -53,12 +47,12 @@ useEffect(() => {
 
   return (
     <div className='maindiv'>
-           {console.log(user1.imageurl,'...........')}
+           {console.log(user1,'...........')}
           <Announcement />
          
           <Navbar bg="light" expand="lg">
           <Container fluid className='subdiv'>
-            <Navbar.Brand href="/"><img
+            <Navbar.Brand onClick={()=> navigate('/')}><img
             src="https://websitedemos.net/baby-store-04/wp-content/uploads/sites/750/2020/12/baby-store-logo.svg"
             width="120"
             height="30"
@@ -105,6 +99,9 @@ useEffect(() => {
                     <ShoppingCartIcon />
                   {/* </Badge> */}
                 </Button> : null}
+                <Button onClick={()=> navigate('/wishlist')} className='btn' variant="outline-secondary">
+                    <AiFillHeart size="1.5rem"/>
+                </Button>
                 { adminState ?<Button  onClick={()=> navigate('/admin')} variant="outline-secondary"><RiAdminLine style={{height:'19px', width:'19px'}}/></Button> :
                 <Button  onClick={()=> navigate('/adminlogin')} variant="outline-secondary"><RiAdminLine style={{height:'19px', width:'19px'}}/></Button> }
               </Form>

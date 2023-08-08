@@ -1,24 +1,19 @@
 import React, { useState , useEffect} from 'react';
 import { Container, Row, Col, Button} from 'react-bootstrap';
-import { useCart } from 'react-use-cart';
 import { BsCartPlus } from 'react-icons/bs';
 import { useParams} from 'react-router-dom';
 // import {categories1} from '../Data';
 import { userContext } from '../App';
 import { useContext } from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const ProductDetails = () => {
     const product = useContext(userContext);
-    const { productdata }= product.state;
+    const { confirm, productdata , user1 }= product.state;
     const [productData1, setProductData1] = useState([]);
     const {productId} = useParams();
-    const { addItem } = useCart();
-
-    //  useEffect(() =>{ 
-    //    const item = productdata.filter((todo)=> (todo.id)  == parseInt(userId) );
-    //    setProductData1( item );
-    //  },[]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -33,6 +28,22 @@ const ProductDetails = () => {
         };
         fetchData();
       }, [productId]);
+
+      const addItemToCart = async (id) => {
+        const prodID = id;
+        try {
+            const userId = user1.userId;
+            const response = await axios.post(`https://localhost:7152/api/Cart/AddToCart?userId=${userId}`, {
+              prodID : prodID,
+              qty : 1
+            });
+      
+            console.log('Item added to cart:', response.data);
+            alert('Item added to cart');
+          } catch (error) {
+            console.error('Error adding item to cart:', error.response.data);
+          }
+    }
 
 console.log(productData1);
 
@@ -56,7 +67,7 @@ console.log(productData1);
                           Rs. {productData1.price}
                       </b>
                       <Button 
-                          onClick={()=>addItem(productData1)}
+                           onClick={()=>{confirm? addItemToCart(productData1.id): navigate('/login')}}
                           style={{borderRadius: '4px', border: 0 , marginLeft :0 , backgroundColor:'#f47c7c'}}
                       >
                           {/* <BsCartPlus size="1.8rem"/> */}

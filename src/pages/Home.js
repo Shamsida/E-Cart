@@ -1,17 +1,13 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Card from 'react-bootstrap/Card';
-import { useNavigate } from "react-router-dom"; 
 import { Link } from 'react-router-dom';
 import './Home.css';
 
 
-function Home() {
-  const navigate = useNavigate();
 
-  const handleCardClick = () => {
-    navigate('/toys'); // Navigate to the '/toys' route when the card is clicked.
-  };
+function Home() {
+
   
   return (
     <div >
