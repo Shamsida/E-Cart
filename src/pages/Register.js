@@ -1,4 +1,4 @@
-import React,{ useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Form} from 'react-bootstrap';
 import { useContext } from 'react';
 import { userContext } from '../App';
@@ -12,6 +12,13 @@ const Register = () => {
     const user = useContext(userContext);
     const { input, setInput, todos, setTodos }= user.state;
     const navigate = useNavigate();
+    const [file, setFile] = useState(null);
+    
+      const handleFileChange = (event) => {
+        const selectedFile = event.target.files[0];
+        setFile(selectedFile);
+      };
+      //console.log(file);
 
     useEffect(() => {
         console.log(todos)
@@ -26,39 +33,35 @@ const Register = () => {
          };
 
       const handleSubmit = async (event) => {
-        const form = event.currentTarget;
         event.preventDefault();
         console.log(input);
-        setTodos([...todos, { id:Date.now(),firstname:user.state.input.firstname, lastname:user.state.input.lastname, email:user.state.input.email, username:user.state.input.username, password:user.state.input.password , mobilenumber:user.state.input.mobilenumber, imgurl:user.state.input.imgurl, completed:false}]);
-        console.log(todos);
-        const firstname = form.firstname.value;
-        const lastname = form.lastname.value;
-        const email = form.email.value;
-        const username = form.username.value;
-        const password = form.password.value;
-        const mobilenumber = form.mobilenumber.value;
-        const imgurl = form.imgurl.value;
-        console.log(firstname, lastname, email, username, password, mobilenumber, imgurl);
+        const formData = new FormData();
+        formData.append('Username', user.state.input.username);
+        formData.append('Firstname', user.state.input.firstname);
+        formData.append('Lastname', user.state.input.lastname);
+        formData.append('Email', user.state.input.email);
+        formData.append('Password', user.state.input.password);
+        formData.append('Imageurl', file);
+        formData.append('Number', user.state.input.mobilenumber);
+        //const formData = new FormData(event.target);
         try{
-            const response=await axios.post('https://localhost:7152/api/user/Signup',{
-                firstname,
-                lastname,
-                email,
-                username,
-                password,
-                number : mobilenumber,
-                imageurl : imgurl
-            });
+            const response = await axios.post('https://localhost:7152/api/user/Signup', formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                },
+              });
             console.log(response,"response");
             const resData = response.data
             console.log(resData,"resData");
+            setFile('');
             setInput({
                 firstname : "",
                 lastname : "",
                 email : "",
                 username : "",
-                mobilenumber: '',
+                file : '',
                 imgurl : '',
+                mobilenumber: '',
                 password : ""
               });
             toast.success("Student has been added");
@@ -110,7 +113,7 @@ const Register = () => {
                             <Form.Label>Username</Form.Label>
                             <Form.Control  
                                 name="username" 
-                                ype="text" 
+                                type="text" 
                                 value={user.state.input.username}
                                  onChange={onInputChange}
                                 placeholder="Username" 
@@ -131,10 +134,13 @@ const Register = () => {
                             <Form.Label>Image </Form.Label>
                             <Form.Control   
                                 name="imgurl" 
-                                type="text" 
-                                value={user.state.input.imgurl}
-                                 onChange={onInputChange}
-                                placeholder="imageurl" required />
+                                type="file"
+                                value={input.file}
+                                onChange={handleFileChange}
+                                placeholder="No File Chosen" required />
+                            {file && (
+                                <img src={URL.createObjectURL(file)} alt="Uploaded" style={{ marginTop: '10px', maxWidth: '25%' }} />
+                            )}
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Mobile number</Form.Label>

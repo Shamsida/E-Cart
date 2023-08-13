@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Input , Form, Label, FormGroup, Col , Button } from 'reactstrap';
 import { userContext } from '../App';
@@ -11,8 +11,15 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function AddProduct() {
     const product = useContext(userContext);
-    const { data, setData , productdata , setProductdata }= product.state;
+    const { data, setData , productdata }= product.state;
     const navigate = useNavigate();
+
+    //const [file, setFile] = useState(null);
+    
+      // const handleFileChange = (event) => {
+      //   const selectedFile = event.target.files[0];
+      //   setFile(selectedFile);
+      // };
 
     useEffect(() => {
       setData({
@@ -20,7 +27,7 @@ function AddProduct() {
         image : '',
         title : '',
         price : '',
-        categoryName : '',
+        categoryname : '',
         description : ''
       });
       console.log(productdata)
@@ -35,37 +42,33 @@ function AddProduct() {
     };
 
     const onFormSubmit = async (event) => {
-        const form = event.currentTarget;
         event.preventDefault();
         console.log(data);
-        const Id = productdata.length + 1 ;
-        setProductdata([...productdata, { id:Id, image:product.state.data.image, title:product.state.data.title,price:product.state.data.price, categoryname:product.state.data.categoryname, description:product.state.data.description, completed:false}]);
         console.log(productdata);
-        const image = product.state.data.image;
-        const title = product.state.data.title;
-        const price = product.state.data.price;
-        const categoryname = product.state.data.categoryname;
-        const description = product.state.data.description;
-        console.log(image,title,price,categoryname,description);
+        // const formData = new FormData();
+        // formData.append('Image', file);
+        // formData.append('Title', product.state.data.title);
+        // formData.append('Price', product.state.data.price);
+        // formData.append('CategoryName', product.state.data.categoryname);
+        // formData.append('Description', product.state.data.description);
+        const formData = new FormData(event.target);
         try{
-          const response=await axios.post('https://localhost:7152/api/Product/PostItems',{
-            image,
-            title,
-            price,
-            categoryName :  categoryname,
-            description
+          const response = await axios.post('https://localhost:7152/api/Product/PostItems', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
         });
-        console.log(response,"response");
-            const resData = response.data
-            console.log(resData,"resData");
-            setData({
+          console.log(response,"response");
+          const resData = response.data
+          console.log(resData,"resData");
+          setData({
               id : '',
               image : '',
               title : '',
               price : '',
-              categoryName : '',
+              categoryname : '',
               description : ''
-            });
+          });
             toast.success("Product Added Successfully");
         }catch(error){
           console.log(error);
@@ -93,11 +96,11 @@ function AddProduct() {
               <Col sm={10}>
                 <Input
                   name="image"
-                  placeholder="Enter image url here"
-                  type="text"
+                  placeholder="No File Chosen"
+                  type="file"
                   value={product.state.data.image}
-                  onChange={onInputChange}
-                //   onChange={onInputChange}
+                 // onChange={handleFileChange}
+                   onChange={onInputChange}
                 />
               </Col>
             </FormGroup>

@@ -63,7 +63,7 @@ function ProductCard(props) {
         <div style={{ background: 'white', height: '19rem', display: 'flex',
         justifyContent: 'center', alignItems: 'center', marginBottom: 'inherit' }}>
             <div style={{ width: '20rem', marginTop:'30px'}}>
-                <Card.Img variant="top" src={image} style={{width:'300px'}} />
+                <Card.Img variant="top" src={`https://localhost:7152/Resources/${image}`} style={{width:'300px'}} />
             </div>
         </div>
         </Link>
