@@ -21,6 +21,7 @@ import UserDetails from './AdminPanel/UserDetails';
 //import { categories1 , users} from './Data';
 import AdminLogin from './AdminPanel/AdminLogin';
 import WishlistMenu from './pages/WishlistMenu';
+import ShoppingCart from './pages/ShoppingCart';
 
 const userContext = createContext ();
 
@@ -52,6 +53,7 @@ function App() {
     categoryname : "",
     description : ""
   });
+  const [userCart, setuserCart] = useState([]);
   const [adminlog, setAdminlog] = useState([{
     username : "Ashwin",
     password : "ashwin23",
@@ -78,7 +80,8 @@ function App() {
     adminState, setAdminState,
     userState, setUserState,
     user1, setUser1,
-    userWishlist, setuserWishlist
+    userWishlist, setuserWishlist,
+    userCart, setuserCart
   }
 
   return (
@@ -95,6 +98,7 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="cart" element={<Cart />} />
           <Route path="wishlist" element={<WishlistMenu/>} />
+          <Route path="shoppingCart" element={<ShoppingCart/>} />
           <Route path='/admin' element={<Admin />} />
           <Route path='/adminlogin' element={<AdminLogin /> } />
           <Route element={<Admin/>}>

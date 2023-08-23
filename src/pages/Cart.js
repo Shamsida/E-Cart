@@ -3,13 +3,15 @@ import { Button, Container, Col, Row, Table} from 'react-bootstrap';
 import { BsCartCheck, BsCartX} from 'react-icons/bs';
 import { useContext } from 'react';
 import { userContext } from '../App';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 
 const Cart = () => {
     const user = useContext(userContext);
-    const { user1 }= user.state;
-    const [userCart, setuserCart] = useState([]);
+    const { user1 , userCart, setuserCart }= user.state;
+    //const [userCart, setuserCart] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchData();
@@ -142,7 +144,7 @@ const Cart = () => {
                                         {detail.product?.title}
                                         </h6>
                                     </td>
-                                    <td>Rs.  {detail.total}</td>
+                                    <td>Rs.  {detail.total} </td>
                                     <td>Quantity ({detail.quantity})</td>
                                     <td>
                                         <Button 
@@ -179,10 +181,11 @@ const Cart = () => {
                             </Button>
                             <Button variant="success"
                                 className="mt-3"
-                                onClick={()=> checkOut()}
+                                //onClick={()=> checkOut()}
+                                onClick={()=> navigate('/shoppingCart')}
                             >       
                                 <BsCartCheck size="1.7rem" />
-                                Place Order
+                                Proceed to Buy
                             </Button>
                         </Col>
                     </Row>
