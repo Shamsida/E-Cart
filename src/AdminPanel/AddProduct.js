@@ -7,12 +7,14 @@ import { AiFillHome } from 'react-icons/ai';
 import axios from 'axios';
 import { ToastContainer , toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from 'js-cookie';
 
 
 function AddProduct() {
     const product = useContext(userContext);
     const { data, setData , productdata }= product.state;
     const navigate = useNavigate();
+    const token = Cookies.get('jwtToken');
 
     //const [file, setFile] = useState(null);
     
@@ -56,6 +58,7 @@ function AddProduct() {
           const response = await axios.post('https://localhost:7152/api/Product/PostItems', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`,
           },
         });
           console.log(response,"response");

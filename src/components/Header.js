@@ -15,6 +15,7 @@ import { userContext } from '../App';
 import { useContext } from 'react';
 import './Header.css';
 import Announcement from './Announcement';
+import Cookies from 'js-cookie';
 import axios from 'axios';
 
 function Header() {
@@ -22,18 +23,22 @@ function Header() {
   const navigate = useNavigate();
   const add = useContext(userContext);
   const {confirm, setConfirm , adminState ,  userState , todos, user1, setUser1} = add.state;
+  const [token, setToken] = useState();
   //const [user1, setUser1] = useState([0]);
 
 
   const Logout=()=>{
+    Cookies.remove('jwtToken');
     setConfirm(false);
     navigate('/');
   }
 
 useEffect(() => {
+  const jwtToken = Cookies.get('jwtToken');
+  setToken(jwtToken);
   const fetchData = async () => {
     try {
-      console.log(userState, 'userstate');
+      //console.log(userState, 'userstate');
       const response = await axios.get(`https://localhost:7152/api/user/GetUsersByUsername?username=${userState}`);
       const item = response.data;
       setUser1(item);
@@ -47,7 +52,7 @@ useEffect(() => {
 
   return (
     <div className='maindiv'>
-           {console.log(user1,'...........')}
+           {/* {console.log(user1,'...........')} */}
           <Announcement />
          
           <Navbar bg="light" expand="lg">
@@ -84,7 +89,7 @@ useEffect(() => {
                   // user1.map((item)=>(
                   <div style={{display:'flex' , justifyContent:'space-between', width:'47px'}}>
                 <img
-                      src={user1.imageurl}
+                      src={`https://localhost:7152/Resources/${user1.imageurl}`}
                       alt=''
                       style={{ width: '28px', height: '28px' }}
                       className='rounded-circle'

@@ -151,7 +151,7 @@ const users = [{
     username : "atuny0",
     mobilenumber : '+63 791 675 8914',
     imgurl : 'https://mdbootstrap.com/img/new/avatars/8.jpg',
-    password : "9uQFF1Lh"
+    password : "CQutx25i8r",
 },{
     id : '2',
     firstname : "Sheldon",
@@ -160,7 +160,7 @@ const users = [{
     username : "hbingley1",
     mobilenumber: '+7 813 117 7139',
     imgurl : 'https://mdbootstrap.com/img/new/avatars/6.jpg',
-    password : "CQutx25i8r"
+    password : "9uQFF1Lh"
   },{
     id : '3',
     firstname : "Terrill",
@@ -188,6 +188,15 @@ const users = [{
     mobilenumber: '+372 285 771 1911',
     imgurl : 'https://imgix.ranker.com/user_node_img/65/1292876/original/ji-sung-recording-artists-and-groups-photo-u1',
     password : "aUTdmmmbH"
+  },{
+    id : 'admin',
+    firstname : "Aiden",
+    lastname : "Mathews",
+    email : "aidenmathews@gmail.com",
+    username : 'aiden05' ,
+    mobilenumber: '6543216540',
+    imgurl : '',
+    password : "adminlogin"
   }]
 
 export  {categories1 , users};

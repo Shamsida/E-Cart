@@ -7,6 +7,7 @@ import { AiFillHome } from 'react-icons/ai';
 import { useNavigate } from "react-router-dom";
 import { AiOutlineUser } from 'react-icons/ai';
 import { VscKey } from 'react-icons/vsc';
+import Cookies from 'js-cookie';
 import axios from 'axios';
 
 const Login = () => {
@@ -26,11 +27,14 @@ const Login = () => {
               username,
               password,
             });
-            navigate('/')
+            const data = response.data;
             alert('success');
             setConfirm(true);
             setUserState(username ,true);
+            console.log(data.token);
+            Cookies.set('jwtToken',data.token);
             console.log('Login successful!', response.data);
+            navigate('/')
           } catch (error) {
             console.error('Login failed:', error.response.data);
           }

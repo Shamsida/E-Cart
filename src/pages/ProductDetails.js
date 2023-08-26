@@ -55,7 +55,7 @@ console.log(productData1);
             <div style={{marginTop:50 ,paddingBottom:30}} className='border'>
               <Row className="justify-content-center mt-5">
                   <Col xs={10} md={7} lg={4} className="p-0">
-                    <img src={productData1.image} alt='img'/>
+                    <img src={`https://localhost:7152/Resources/${productData1.image}`} alt='img'/>
                   </Col>
                   <Col xs={10} md={7} lg={7} className={`text-black product-details`}>
                       <h1 style={{fontFamily:'sans-serif'}}>{productData1.title}</h1>

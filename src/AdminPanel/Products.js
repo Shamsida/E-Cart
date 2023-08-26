@@ -110,7 +110,7 @@ console.log(productdata)
                     <th>Image</th>
                     <th>Name</th>
                     <th>Price</th>
-                    <th>Actions</th>
+                    <th>Actions</th> 
                   </tr>
                   </thead>
                     <tbody style={{textAlign:'center'}}>
@@ -122,7 +122,7 @@ console.log(productdata)
                                         <div style={{ background: 'white', height: '8rem', overflow: 'hidden', display: 'flex',
                                         justifyContent: 'center', alignItems: 'center' }}>
                                             <div>
-                                                <img src={item.image} style={{ width: '6rem'}} alt={item.title} />
+                                                <img src={`https://localhost:7152/Resources/${item.image}`} style={{ width: '6rem'}} alt={item.title} />
                                             </div>
                                         </div>
                                     </td>

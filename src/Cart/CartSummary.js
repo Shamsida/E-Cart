@@ -21,14 +21,14 @@ import axios from 'axios';
             const response = await axios.get(`https://localhost:7152/api/Cart/GetCart?userId=${userId}`);
             const item = response.data;
              setuserCart(item);
-             console.log(userCart.length,'length');
+             //console.log(userCart.length,'length');
             } 
             catch (error) {
             console.error(error);
             }
         }
 
-      console.log(userCart);
+      //console.log(userCart);
 
       const removeItem = async (id) => {
         try {
@@ -87,7 +87,7 @@ import axios from 'axios';
         >
           <div className="p-3">
             <img
-              src={cartItem.cartDetails[0]?.product?.image || ''}
+              src={`https://localhost:7152/Resources/${cartItem.cartDetails[0]?.product?.image || ''}`}
               alt={cartItem.cartDetails[0]?.product?.title}
               width={"100px"}
               className="rounded-circle"
@@ -145,7 +145,7 @@ import axios from 'axios';
         >
           <div className="p-3">
             <img
-              src={detail.product?.image || ''}
+              src={`https://localhost:7152/Resources/${detail.product?.image || ''}`}
               alt={detail.product?.title}
               width={"100px"}
               className="rounded-circle"

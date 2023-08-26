@@ -77,7 +77,7 @@ function Users() {
           <td style={{paddingTop :45, paddingLeft:20}} >
           <div className='d-flex align-items-center'>
               <img
-                src={item.imageurl}
+                src={`https://localhost:7152/Resources/${item.imageurl}`}
                 alt=''
                 style={{ width: '60px', height: '60px' }}
                 className='rounded-circle'

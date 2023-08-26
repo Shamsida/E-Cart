@@ -22,6 +22,7 @@ import UserDetails from './AdminPanel/UserDetails';
 import AdminLogin from './AdminPanel/AdminLogin';
 import WishlistMenu from './pages/WishlistMenu';
 import ShoppingCart from './pages/ShoppingCart';
+import Payment from './pages/Payment';
 
 const userContext = createContext ();
 
@@ -40,6 +41,11 @@ function App() {
     mobilenumber: '',
     imgurl : '',
     password : ""
+  });
+  const [values, setValues] = useState({
+    address : "",
+    email : "",
+    mobilenumber: ''
   });
   const [todos, setTodos] = useState([]);
   const [user1, setUser1] = useState([0]);
@@ -81,7 +87,8 @@ function App() {
     userState, setUserState,
     user1, setUser1,
     userWishlist, setuserWishlist,
-    userCart, setuserCart
+    userCart, setuserCart,
+    values, setValues
   }
 
   return (
@@ -99,6 +106,7 @@ function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="wishlist" element={<WishlistMenu/>} />
           <Route path="shoppingCart" element={<ShoppingCart/>} />
+          <Route path="payment/:cartId" element={<Payment/>} />
           <Route path='/admin' element={<Admin />} />
           <Route path='/adminlogin' element={<AdminLogin /> } />
           <Route element={<Admin/>}>

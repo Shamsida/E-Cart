@@ -51,7 +51,7 @@ function UserDetails() {
           <div className='border p-4'style={{display:'flex' , borderRadius:6 , borderWidth :'10px', height: 450}}>
           <div style={{width:250}}>
           <Card style={{height:230, textAlign:'center'}}> 
-            <Card.Img variant="top" src={user1.imageurl}
+            <Card.Img variant="top" src={`https://localhost:7152/Resources/${user1.imageurl}`}
             style={{ marginLeft:65, marginTop:40 , width: '100px', height: '100px' }}
             className='rounded-circle' />
             <Card.Body>

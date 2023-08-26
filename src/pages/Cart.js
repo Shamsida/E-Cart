@@ -4,16 +4,20 @@ import { BsCartCheck, BsCartX} from 'react-icons/bs';
 import { useContext } from 'react';
 import { userContext } from '../App';
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 import axios from 'axios';
 
 
 const Cart = () => {
     const user = useContext(userContext);
-    const { user1 , userCart, setuserCart }= user.state;
+    const { user1 , userCart, setuserCart , values }= user.state;
     //const [userCart, setuserCart] = useState([]);
+    const [token, setToken] = useState();
     const navigate = useNavigate();
 
     useEffect(() => {
+        const jwtToken = Cookies.get('jwtToken');
+        setToken(jwtToken);
         fetchData();
       }, [user1]);
 
@@ -32,6 +36,8 @@ const Cart = () => {
         }
 
       console.log(userCart);
+      console.log(values, '....values');
+      console.log(token);
 
       const removeItem = async (id) => {
         try {
@@ -106,7 +112,7 @@ const Cart = () => {
                                         <div style={{ background: 'white', height: '8rem', overflow: 'hidden', display: 'flex',
                                         justifyContent: 'center', alignItems: 'center' }}>
                                             <div style={{ padding: ''}}>
-                                                <img src={cartItem.cartDetails[0]?.product?.image || ''} style={{ width: '6rem'}} alt={cartItem.cartDetails[0]?.product?.title} />
+                                                <img src={`https://localhost:7152/Resources/${cartItem.cartDetails[0]?.product?.image || ''}`} style={{ width: '6rem'}} alt={cartItem.cartDetails[0]?.product?.title} />
                                             </div>
                                         </div>
                                     </td>
@@ -135,7 +141,7 @@ const Cart = () => {
                                             <div style={{ background: 'white', height: '8rem', overflow: 'hidden', display: 'flex',
                                                 justifyContent: 'center', alignItems: 'center' }}>
                                                 <div style={{ padding: ''}}>
-                                                    <img src={detail.product?.image || ''} style={{ width: '6rem'}} alt={detail.product?.title} />
+                                                    <img src={`https://localhost:7152/Resources/${detail.product?.image || ''}`} style={{ width: '6rem'}} alt={detail.product?.title} />
                                                 </div>
                                             </div>
                                         </td>
