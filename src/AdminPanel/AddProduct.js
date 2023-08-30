@@ -47,6 +47,7 @@ function AddProduct() {
         event.preventDefault();
         console.log(data);
         console.log(productdata);
+        console.log(token,'..token');
         // const formData = new FormData();
         // formData.append('Image', file);
         // formData.append('Title', product.state.data.title);

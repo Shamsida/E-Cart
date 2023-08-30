@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { userContext } from '../App';
 import { useNavigate } from "react-router-dom";
 import { AiFillHome } from 'react-icons/ai';
+import Cookies from 'js-cookie';
 import axios from 'axios';
 
 //icons 
@@ -28,7 +29,9 @@ const AdminLogin = () => {
               username,
               password,
             });
+            const data = response.data;
             setAdminState(true);
+            Cookies.set('jwtToken',data.token);
             alert('success');
             navigate('/admin');
             console.log('Login successful!', response.data);

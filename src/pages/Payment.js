@@ -20,8 +20,9 @@ const Payment = () => {
   const Payment = async () => {
     try {
       const response =await axios.post(`https://localhost:7152/api/Payment?cartId=${cartId}`);
+      console.log(response.data,"payment response");
         setPaymentData(response.data.result)
-        console.log(response.data.result,"payment");
+        console.log(paymentData,"payment");
     } catch (error) {
       console.log(error);
     }
@@ -34,8 +35,12 @@ const Payment = () => {
   }, []);
   
   const stripePromise = loadStripe(
-    "pk_test_51NeFSaALLct6ACzM8fP53G9uRLndp3xSY6rkeqtOeKpG3nfTCZ8vjN6fatd1n5pgLyssBpsSQsm0TXsnAbuQw7GD00pthpqJUg"
+    "pk_test_51NkgGASAxYNhzbkeIZt09MC0VaeP1fhxWb97RMzWwZNtA1raInjoYsghNhDG6r1ycUgoqKceNkjWLbnGn0smO4iN002FNyVJrJ"
   );
+
+  if(!paymentData.clientSecret){
+    return <>Loading</>
+  }
   const options = {
     // passing the client secret obtained from the server
     clientSecret: paymentData.clientSecret,

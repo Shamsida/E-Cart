@@ -1,4 +1,5 @@
 import React, { useEffect , useState } from 'react';
+import jwtDecode from 'jwt-decode';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -15,31 +16,48 @@ import { userContext } from '../App';
 import { useContext } from 'react';
 import './Header.css';
 import Announcement from './Announcement';
+//import Dropdown from 'react-bootstrap/Dropdown';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from 'reactstrap';
+import PropTypes from 'prop-types';
 
 function Header() {
 
   const navigate = useNavigate();
   const add = useContext(userContext);
-  const {confirm, setConfirm , adminState ,  userState , todos, user1, setUser1} = add.state;
-  const [token, setToken] = useState();
-  //const [user1, setUser1] = useState([0]);
+  const {confirm, setConfirm , adminState ,  userState , user1, setUser1} = add.state;
+  //const [username,setUsername] = useState()
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
 
 
   const Logout=()=>{
     Cookies.remove('jwtToken');
+    //setUserState('',false);
     setConfirm(false);
     navigate('/');
   }
 
 useEffect(() => {
   const jwtToken = Cookies.get('jwtToken');
-  setToken(jwtToken);
+  setConfirm(jwtToken!==undefined)
+  const decodeToken = jwtDecode(jwtToken);
+  console.log(decodeToken,"decToken");
+  //setUsername(decodeToken.unique_name);
+  
+
   const fetchData = async () => {
     try {
+      //console.log(username,"username");
       //console.log(userState, 'userstate');
-      const response = await axios.get(`https://localhost:7152/api/user/GetUsersByUsername?username=${userState}`);
+      const response = await axios.get(`https://localhost:7152/api/user/GetUsersByUsername?username=${decodeToken.unique_name}`);
       const item = response.data;
       setUser1(item);
 
@@ -48,7 +66,7 @@ useEffect(() => {
     }
   };
   fetchData();
-}, [userState]);
+}, []);
 
   return (
     <div className='maindiv'>
@@ -84,31 +102,36 @@ useEffect(() => {
                   className="me-2"
                   aria-label="Search"
                 />
-                {confirm? <Button style={{width:70}} onClick={Logout} variant="outline-secondary">
-                {user1 && 
-                  // user1.map((item)=>(
-                  <div style={{display:'flex' , justifyContent:'space-between', width:'47px'}}>
-                <img
-                      src={`https://localhost:7152/Resources/${user1.imageurl}`}
-                      alt=''
-                      style={{ width: '28px', height: '28px' }}
-                      className='rounded-circle'
-                    />
-                  <FiLogOut  style={{marginTop:'4px'}}/>
-                 </div>
-                  // 
-                }
-                </Button> :<Button onClick={()=> navigate('/login')} variant="outline-secondary"><FaUserAlt /></Button>}
+                { adminState ?<Button  onClick={()=> navigate('/admin')} variant="outline-secondary"><RiAdminLine style={{height:'19px', width:'19px'}}/></Button> :
+                <Button  onClick={()=> navigate('/adminlogin')} variant="outline-secondary"><RiAdminLine style={{height:'19px', width:'19px'}}/></Button> }
+                <Button onClick={()=> navigate('/wishlist')} className='btn' variant="outline-secondary">
+                    <AiFillHeart size="1.5rem"/>
+                </Button>
                 {confirm? <Button onClick={()=> navigate('/cart')} className='btn' variant="outline-secondary">
                   {/* <Badge badgeContent={4} color="info"> */}
                     <ShoppingCartIcon />
                   {/* </Badge> */}
                 </Button> : null}
-                <Button onClick={()=> navigate('/wishlist')} className='btn' variant="outline-secondary">
-                    <AiFillHeart size="1.5rem"/>
-                </Button>
-                { adminState ?<Button  onClick={()=> navigate('/admin')} variant="outline-secondary"><RiAdminLine style={{height:'19px', width:'19px'}}/></Button> :
-                <Button  onClick={()=> navigate('/adminlogin')} variant="outline-secondary"><RiAdminLine style={{height:'19px', width:'19px'}}/></Button> }
+                {confirm ? <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                              <DropdownToggle caret>
+                              {user1 && 
+                                  <img
+                                    src={`https://localhost:7152/Resources/${user1.imageurl}`}
+                                    alt=''
+                                    style={{ width: '28px', height: '28px' }}
+                                    className='rounded-circle'
+                                  />
+                              }
+                              </DropdownToggle>
+                              <DropdownMenu >
+                                <DropdownItem>Orders</DropdownItem>
+                                <DropdownItem onClick={Logout}>Logout</DropdownItem>
+                              </DropdownMenu>
+                            </Dropdown> :<Button 
+                                    onClick={()=> navigate('/login')} variant="outline-secondary">
+                                      <FaUserAlt />
+                                    </Button> }
+                
               </Form>
             </Navbar.Collapse>
           </Container>

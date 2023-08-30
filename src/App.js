@@ -23,15 +23,18 @@ import AdminLogin from './AdminPanel/AdminLogin';
 import WishlistMenu from './pages/WishlistMenu';
 import ShoppingCart from './pages/ShoppingCart';
 import Payment from './pages/Payment';
+import Cookies from 'js-cookie';
+import OrderList from './pages/Order/OrderList';
 
 const userContext = createContext ();
 
 function App() {
   let location = useLocation();
   const[state1, setState1]=useState(false);
-  const[userState, setUserState]=useState('', false);
+  const[userState, setUserState]=useState('',false);
   const[adminState, setAdminState]=useState(false);
   const [confirm, setConfirm] = useState(false);
+  
   const [input, setInput] = useState({
     id : '',
     firstname : "",
@@ -47,6 +50,7 @@ function App() {
     email : "",
     mobilenumber: ''
   });
+  
   const [todos, setTodos] = useState([]);
   const [user1, setUser1] = useState([0]);
   const [userWishlist, setuserWishlist] = useState([]);
@@ -88,7 +92,7 @@ function App() {
     user1, setUser1,
     userWishlist, setuserWishlist,
     userCart, setuserCart,
-    values, setValues
+    values, setValues,
   }
 
   return (
@@ -107,6 +111,7 @@ function App() {
           <Route path="wishlist" element={<WishlistMenu/>} />
           <Route path="shoppingCart" element={<ShoppingCart/>} />
           <Route path="payment/:cartId" element={<Payment/>} />
+          <Route path="orderlist" element={<OrderList/>} />
           <Route path='/admin' element={<Admin />} />
           <Route path='/adminlogin' element={<AdminLogin /> } />
           <Route element={<Admin/>}>
