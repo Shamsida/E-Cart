@@ -48,9 +48,10 @@ function Header() {
 useEffect(() => {
   const jwtToken = Cookies.get('jwtToken');
   setConfirm(jwtToken!==undefined)
+  if(jwtToken){
   const decodeToken = jwtDecode(jwtToken);
   console.log(decodeToken,"decToken");
-  //setUsername(decodeToken.unique_name);
+  // setUsername(decodeToken.unique_name);
   
 
   const fetchData = async () => {
@@ -66,6 +67,10 @@ useEffect(() => {
     }
   };
   fetchData();
+}
+else{
+  setConfirm(false)
+}
 }, []);
 
   return (
@@ -124,7 +129,7 @@ useEffect(() => {
                               }
                               </DropdownToggle>
                               <DropdownMenu >
-                                <DropdownItem>Orders</DropdownItem>
+                                <DropdownItem onClick={()=> navigate('/allorders')}>Orders</DropdownItem>
                                 <DropdownItem onClick={Logout}>Logout</DropdownItem>
                               </DropdownMenu>
                             </Dropdown> :<Button 

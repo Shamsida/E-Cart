@@ -25,6 +25,7 @@ import ShoppingCart from './pages/ShoppingCart';
 import Payment from './pages/Payment';
 import Cookies from 'js-cookie';
 import OrderList from './pages/Order/OrderList';
+import AllOrders from './pages/Order/AllOrders';
 
 const userContext = createContext ();
 
@@ -111,7 +112,8 @@ function App() {
           <Route path="wishlist" element={<WishlistMenu/>} />
           <Route path="shoppingCart" element={<ShoppingCart/>} />
           <Route path="payment/:cartId" element={<Payment/>} />
-          <Route path="orderlist" element={<OrderList/>} />
+          <Route path="allorders" element={<AllOrders/>} />
+          <Route path="orderlist/:orderId" element={<OrderList/>} />
           <Route path='/admin' element={<Admin />} />
           <Route path='/adminlogin' element={<AdminLogin /> } />
           <Route element={<Admin/>}>
