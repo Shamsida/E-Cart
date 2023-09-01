@@ -92,8 +92,8 @@ function Home() {
     </Carousel>
 
     <div className='items'>
-      <h3 style={{marginTop:'10px', marginLeft:550}}>Shop By Category</h3>
-        <div style={{display :"inline-grid", gridTemplateColumns:'auto auto auto', columnGap:'45px' ,marginTop:'20px', marginLeft:150}}>
+      <h3 style={{marginTop:'10px', textAlign : 'center'}}>Shop By Category</h3>
+        <div style={{display :"inline-grid", gridTemplateColumns:'auto auto auto', columnGap:'4rem' ,marginTop:'20px', marginLeft:'10rem'}}>
           <Card className='bata' style={{ width: '20rem',height: '30rem'}}>
           <Link  to={`/toys`} >
             <Card.Img className='img' variant="top" 

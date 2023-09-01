@@ -121,7 +121,7 @@ function UserDetails() {
               >
               Mobile Number :
               </Label>
-              <Col sm={8} style={{marginLeft:11}}>
+              <Col sm={8} style={{marginLeft:21}}>
                 <Input
                   name="price"
                   disabled

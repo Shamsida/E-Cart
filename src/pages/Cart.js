@@ -19,7 +19,8 @@ const Cart = () => {
         const jwtToken = Cookies.get('jwtToken');
         setToken(jwtToken);
         fetchData();
-      }, [user1]);
+        //window.location.reload();
+      }, [userCart]);
 
         const fetchData = async () => {
           try {

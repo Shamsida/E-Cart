@@ -23,9 +23,11 @@ import AdminLogin from './AdminPanel/AdminLogin';
 import WishlistMenu from './pages/WishlistMenu';
 import ShoppingCart from './pages/ShoppingCart';
 import Payment from './pages/Payment';
-import Cookies from 'js-cookie';
+//import Cookies from 'js-cookie';
 import OrderList from './pages/Order/OrderList';
 import AllOrders from './pages/Order/AllOrders';
+import UserOrders from './AdminPanel/UserOrders';
+import EditOrders from './AdminPanel/EditOrders';
 
 const userContext = createContext ();
 
@@ -46,6 +48,14 @@ function App() {
     imgurl : '',
     password : ""
   });
+  const [order, setOrder] = useState({
+    userid : '',
+    items : "",
+    total : "",
+    date : "",
+    status : "",
+    paymentstatus: ''
+  });
   const [values, setValues] = useState({
     address : "",
     email : "",
@@ -54,6 +64,7 @@ function App() {
   
   const [todos, setTodos] = useState([]);
   const [user1, setUser1] = useState([0]);
+  const [admin, setAdmin] = useState([0]);
   const [userWishlist, setuserWishlist] = useState([]);
   const [ productdata , setProductdata ] = useState([]);
   const [data, setData] = useState({
@@ -94,6 +105,8 @@ function App() {
     userWishlist, setuserWishlist,
     userCart, setuserCart,
     values, setValues,
+    order, setOrder,
+    admin, setAdmin
   }
 
   return (
@@ -122,6 +135,8 @@ function App() {
             <Route path="/admin/products" element={<Products />} />
             <Route path="/admin/addproducts" element={<AddProduct />} />
             <Route path="/admin/editproducts/:productId" element={<EditProduct />} />
+            <Route path="/admin/orderlist" element={<UserOrders />} />
+            <Route path="/admin/editorders/:orderId" element={<EditOrders />} />
           </Route>
           {/* <Route path="admin" element={<Admin />} /> */}
           <Route path="productdetails/:productId" element={<ProductDetails />} />

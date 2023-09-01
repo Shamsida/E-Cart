@@ -23,8 +23,8 @@ export const AdminSidebar = [
     cName: 'nav-text'
   },
   {
-    title: 'Support',
-    path: '/support',
+    title: 'OrderList',
+    path: '/admin/orderlist',
     icon: <IoIcons.IoMdHelpCircle />,
     cName: 'nav-text'
   }

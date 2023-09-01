@@ -47,10 +47,11 @@ function Header() {
 
 useEffect(() => {
   const jwtToken = Cookies.get('jwtToken');
-  setConfirm(jwtToken!==undefined)
   if(jwtToken){
   const decodeToken = jwtDecode(jwtToken);
   console.log(decodeToken,"decToken");
+  if(decodeToken.role=='user'){
+    setConfirm(true)
   // setUsername(decodeToken.unique_name);
   
 
@@ -67,6 +68,8 @@ useEffect(() => {
     }
   };
   fetchData();
+  
+}
 }
 else{
   setConfirm(false)

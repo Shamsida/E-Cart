@@ -7,6 +7,7 @@ import { useContext } from 'react';
 import Form from 'react-bootstrap/Form';
 import { useState , useEffect } from 'react';
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 
 function Users() {
@@ -15,6 +16,8 @@ function Users() {
   const[searchInput , setSearchinput] = useState('');
   const [todos1 , setTodos1] = useState(todos);
 
+  const jwtToken = Cookies.get('jwtToken');
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -22,7 +25,11 @@ function Users() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://localhost:7152/api/user/GetUsers"
+        "https://localhost:7152/api/user/GetUsers" , {
+          headers: {
+            'Authorization': `Bearer ${jwtToken}`,
+          },
+        }
       );
       const data = response.data;
       console.log(data,"data");
@@ -52,7 +59,7 @@ function Users() {
       <div style={{marginTop:50}}>
       <div style={{display:'flex',justifyContent:"space-between", alignItems:'center'}}>
         <h1 style={{marginLeft:12}} >Users</h1>
-        <Form className="d-flex" style={{marginRight:140}}>
+        <Form className="d-flex" style={{marginRight:'7rem'}}>
           <Form.Control
             type="search"
             placeholder="Search"
@@ -63,7 +70,7 @@ function Users() {
             }}/>
         </Form>
         </div>
-        <Table style={{width:900 , marginLeft:10, marginTop:20}} responsive="sm" striped bordered hover variant={'light'} className="mb-5">
+        <Table style={{width:'90%' , marginLeft:10, marginTop:20}} responsive="sm" striped bordered hover variant={'light'} className="mb-5">
       <thead>
         <tr style={{textAlign:'center', height:50}}>
           <th>Name</th>
